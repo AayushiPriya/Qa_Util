@@ -34,13 +34,17 @@ public class KafkaConnector<U,V> {
 
             kafkaConsumer.subscribe(topics);
             System.out.println("<------------------KAFKA Connection is successful and is Subscribing----------------------->");
-            while (true){
+            long endConnectionTime = System.currentTimeMillis()+ kafkaConfiguration.getSourceConnectionTime() ;
+            while (System.currentTimeMillis()<endConnectionTime){
                 ConsumerRecords<U,V> records = kafkaConsumer.poll(10);
                 for (ConsumerRecord<U,V> record: records){
                     System.out.println("<------------------Message Received----------------------->");
                     subscriber.printText(record.value());
                 }
             }
+            System.out.println("<------------------KAFKA Connection Timeout----------------------->");
+            kafkaConsumer.close();
+            System.out.println("<------------------MQTT Connection Closed----------------------->");
         }catch (Exception e){
             System.out.println("An Exception has occured!");
             e.printStackTrace();

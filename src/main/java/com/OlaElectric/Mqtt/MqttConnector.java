@@ -34,10 +34,25 @@ public class MqttConnector {
         }
     }
 
-    public void subscribe() throws MqttException {
+    private void receiveMessages() throws MqttException {
         MqttSubscriber subcriber = new MqttSubscriber(configuration.getSubscribeType());
         client.setCallback(subcriber);
         client.subscribe(configuration.getTopic());
     }
+
+    public void subscribe() throws MqttException {
+        long connectionEndTime = System.currentTimeMillis() + configuration.getSourceConnectionTime() ;
+        while  (System.currentTimeMillis()<connectionEndTime){
+            receiveMessages();
+
+        }
+        System.out.println("<------------------MQTT connection timeout----------------------->");
+        client.disconnectForcibly();
+        client.close();
+        System.out.println("<------------------MQTT Connection Closed----------------------->");
+    }
+
+
 }
+
 

@@ -13,5 +13,6 @@ public class Configuration {
 
     private String Topic;
 
+    private long sourceConnectionTime;
 
 }

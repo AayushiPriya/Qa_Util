@@ -23,6 +23,7 @@ public class Main {
             configuration.setSubscribeType(args[3]);
             configuration.setUserName(args[4]);
             configuration.setPassWord(args[5]);
+            configuration.setSourceConnectionTime(1000*Long.parseLong(args[6]));
             connectToMqtt(configuration);
         }
         else if (source.equals(ConnectorType.KAFKA.name())){
@@ -31,6 +32,7 @@ public class Main {
             configuration.setHost(args[1]);
             configuration.setTopic(args[2]);
             configuration.setSubscribeType(args[3]);
+            configuration.setSourceConnectionTime(1000*Long.parseLong(args[4]));
             configuration.setStringSerialiser("org.apache.kafka.common.serialization.StringDeserializer");
             configuration.setByteArraySerialiser("org.apache.kafka.common.serialization.ByteArrayDeserializer");
             configuration.setGroupID("test-group_001");
@@ -48,11 +50,7 @@ public class Main {
         MqttConnector mqttConnection = new MqttConnector(configuration);
         mqttConnection.connect();
         System.out.println("<------------------Subscribing Mqtt messages----------------------->");
-
-        while(true){
-            mqttConnection.subscribe();
-            Thread.sleep(45000);
-        }
+        mqttConnection.subscribe();
     }
 
     public static void connectToKafka(KafkaConfiguration configuration){
