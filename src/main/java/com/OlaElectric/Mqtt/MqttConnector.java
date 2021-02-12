@@ -44,7 +44,6 @@ public class MqttConnector {
         long connectionEndTime = System.currentTimeMillis() + configuration.getSourceConnectionTime() ;
         while  (System.currentTimeMillis()<connectionEndTime){
             receiveMessages();
-
         }
         System.out.println("<------------------MQTT connection timeout----------------------->");
         client.disconnectForcibly();

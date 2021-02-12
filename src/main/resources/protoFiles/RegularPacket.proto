@@ -1,0 +1,113 @@
+syntax= "proto2";
+package vendor;
+
+option java_package="com.OlaElectric.protoBuf";
+option java_outer_classname="RegularPacket";
+
+message RegularDataSt { 
+	required uint64 timestamp = 1; 
+	required uint32 packet_id = 2; 
+	required string device_id = 3; 
+	required string schema_version=4; 
+	optional string vehicleIdentificationNumber = 5;
+	repeated GpsDataSt gps_data = 6; 
+	repeated BatteryDataSt battery_data = 7; 
+	repeated VehicleDataSt vehicle_data = 8; 
+	repeated MCUDataSt mcu_data = 9;
+	repeated string notes = 10; 
+}
+
+
+
+message GpsDataSt { 
+	optional uint64 timestamp = 1; 
+	optional string schema_version=2; 
+	optional float latitude = 3; 
+	optional float longitude = 4; 
+	optional float altitude = 5; 
+	optional float lat_accuracy = 6; 
+	optional float long_accuracy = 7;
+	optional float alt_accuracy = 8;
+	optional float course = 9; 
+	optional float speed = 10; 
+}
+
+message BatteryDataSt {
+	optional uint64 timestamp = 1;
+	optional string schema_version = 2;
+	optional uint32 battery_soc = 3;
+	optional uint32 battery_soh = 4;
+	optional uint32 remaining_energy_available_in_battery = 5;
+	optional uint32 average_battery_current_drawn = 6;
+	optional uint32 charging_status = 7;
+	optional uint32 time_to_charge = 8;
+	optional uint32 charge_cycle_completed = 9;
+	optional float battery_max_temperature = 10;
+	optional float battery_min_temperature = 11;
+	optional uint32 battery_Pack_average_current = 12;
+	optional uint32 cell_max_voltage = 13;
+	optional uint32 cell_min_voltage = 14;
+	optional float pcb_maximum_temperature = 15;
+	optional uint32 battery_pack_numbrer_Id = 16;
+	optional uint32 battery_state = 17;
+	optional uint32 charge_present_state = 18;
+	optional uint32 bms_error = 19; // bit-wise parsing based on CAN message BMSX_Error
+	optional uint32 bms_fault = 20; // bit-wise parsing based on CAN message BMSX_Fault
+	optional string battery_identification_number = 21;
+}
+
+
+message VehicleDataSt { 
+	optional uint64 timestamp = 1; 
+	optional string schema_version = 2; 
+	optional uint32 vehicle_range_on_ecoMode = 3; 
+	optional uint32 vehicle_range_on_normalMode = 4; 
+	optional uint32 vehicle_range_on_sportsMode = 5; 
+	optional uint32 vehicle_range_on_boost1Mode = 6; 
+	optional uint32 vehicle_range_on_boost2Mode = 7; 
+	optional uint32 scooter_mode = 8; 
+	optional uint32 drive_mode = 9; 
+	optional bool headlight_status = 10;
+	optional bool steering_lock_status = 11;
+	optional bool side_stand_status = 12;
+	optional uint32 boost_modes_avail_stat = 13; 
+	optional uint32 energy_consumed_for_ride = 14; 
+	optional uint32 odometer_value = 15; 
+	optional uint32 overall_soc = 16; 
+	optional uint32 vehicle_aux_battery_charger_level = 17; 
+	optional uint32 no_of_battery_modules_connected = 18; 
+	repeated RideDataPerSecSt data = 19; 
+}
+
+message RideDataPerSecSt {
+	optional uint64 timestamp = 1;
+	optional uint32 brake_data = 2;
+	optional float speedometer_value = 3;
+	optional uint32 acceleration_value = 4; 
+	optional bool reverse_mode_engaged_status = 5;
+}
+
+message MCUDataSt { 
+	optional uint64 timestamp = 1; 
+	optional string schema_version = 2; 
+	optional uint32 can_open_alarm_code_master = 3; 
+	optional uint32 alarm_status_master = 4;
+	optional uint32 Zapi_alarm_code_master = 5; 
+	optional uint32 Flag_alarm_master = 6;
+	optional uint32 alarm_extra_master = 7;
+	optional uint32 CANOpen_alarm_code_slave = 8; 
+	optional uint32 alarm_status_slave = 9;
+	optional uint32 Zapi_alarm_code_slave = 10; 
+	optional uint32 Flag_alarm_slave = 11; 
+	optional uint32 alarm_extra_slave = 12;
+	optional float vehicle_Speed = 13; 
+	optional uint32 odometer_Reading = 14;
+	optional float throttle_sensor1_value = 15;
+	optional float throttle_sensor2_value = 16;
+	optional uint32 motor_Current = 17;
+	optional uint32 warning_Alarm_Info = 18;
+	optional uint32 motor_Temperature = 19;
+	optional uint32 inverter_Temperature = 20;
+	optional float dC_Battery_Current = 21;
+	optional uint32 battery_Voltage = 22;
+}

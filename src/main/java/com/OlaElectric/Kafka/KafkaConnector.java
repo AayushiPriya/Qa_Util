@@ -23,7 +23,7 @@ public class KafkaConnector<U,V> {
     }
 
     public void consume(){
-        KafkaSubscriber subscriber = new KafkaSubscriber<V>();
+        KafkaSubscriber subscriber = new KafkaSubscriber<V>(kafkaConfiguration.getSubscribeType());
         KafkaConsumer kafkaConsumer = null;
         try{
             kafkaConsumer = new KafkaConsumer<U,V>(kafkaProperties());

@@ -1,5 +1,6 @@
 package com.OlaElectric.Subscribers;
 import com.OlaElectric.Constants.MessageType;
+import com.OlaElectric.deserializer.Deserializer;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -7,10 +8,10 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MqttSubscriber implements MqttCallback {
 
-    private String subscribeType;
+    private String messageType;
 
-    public MqttSubscriber(String subscribeType){
-        this.subscribeType = subscribeType;
+    public MqttSubscriber(String messageType){
+        this.messageType = messageType;
     }
 
     @Override
@@ -21,8 +22,10 @@ public class MqttSubscriber implements MqttCallback {
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
 
-        if (subscribeType.equals(MessageType.TEXT.name())) {
+        if (messageType.equals(MessageType.TEXT.name())) {
             regularMessage(mqttMessage.getPayload());
+        } else {
+            deserialize(messageType,mqttMessage.getPayload());
         }
 
     }
@@ -32,10 +35,13 @@ public class MqttSubscriber implements MqttCallback {
 
     }
 
-    public void regularMessage(byte[] mqttMessage){
+    private void regularMessage(byte[] mqttMessage){
         System.out.println( new String(mqttMessage));
     }
 
-
+    private void deserialize(String subscribeType,byte[] message){
+        Deserializer deserializer = new Deserializer(subscribeType);
+        deserializer.printMessage(message);
+    }
 
 }
