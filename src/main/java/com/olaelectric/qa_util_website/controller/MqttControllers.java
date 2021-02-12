@@ -5,11 +5,13 @@ import com.olaelectric.qa_util_website.constants.SourceType;
 import com.olaelectric.qa_util_website.dta.WebsiteRequestPojo;
 import com.olaelectric.qa_util_website.service.PublishCommand;
 import com.olaelectric.qa_util_website.util.Scripting;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class MqttControllers {
 
@@ -45,8 +47,8 @@ public class MqttControllers {
         /**
          * Username and password is hardcoded.
          */
-        genarateCommandList.add("UserName");
-        genarateCommandList.add("PassWord");
+        genarateCommandList.add("SERVICE:BTESTER");
+        genarateCommandList.add("eyJhbGciOiJIUzI1NiJ9.eyJ0ZW5hbnRfaWQiOiJCVEVTVEVSIiwidGVuYW50X3R5cGUiOiJTRVJWSUNFIiwiZW50aXR5X3R5cGUiOiJFRElUSCIsInNlcnZpY2VfbmFtZSI6IlNFUlZJQ0UiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwaXJlX2F0IjoiMTYzODUxOTEwMTIzMSIsImlhdCI6MTYwNjk4MzEwMSwiZXhwIjoxNjM4NTE5MTAxfQ.S3vEX6PoAD18Pun-JneauIyr4etKniAoEC9eJbnKZzk");
 
         /**
          * The connection time for mqtt is hardcode. it is in seconds
@@ -66,8 +68,7 @@ public class MqttControllers {
         /**
          * This is where the command will be published
          */
-        //publishCommand.excute(genarateCommandList,responseaddress.toString());
-
+        publishCommand.excute(genarateCommandList,responseaddress.toString());
         return responseaddress.toString();
     }
 

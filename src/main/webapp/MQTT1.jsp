@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bob The Builder</title>
+<title>QA_util_Website</title>
 <link rel="stylesheet" type="text/css" href="./assets/bootstrap.min (1).css">
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>    
 <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
@@ -66,7 +66,7 @@
         <button class="btn btn-primary" id = "submitButton" onclick="displayIframe()">Submit</button>
     </div> 
     <div class="container text-center">
-        <h2> Messages of kafka will be published here</h2>
+        <h2> Messages of MQTT will be published here</h2>
         <iframe id="Iframe1234" src="" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:60%;width:95%;position:absolute;top:250px;left:50px;right:0px;bottom:0px;border:none;padding:15px;" name="trial1"></iframe>
     </div> 
 </div>
@@ -81,7 +81,7 @@
         console.log("The host selected is : "+hostValue+"  topic is : "+topicValue+" text is : "+textValue);   
         let address = getGottyServerAddress(hostValue,topicValue,textValue);
         console.log("The Gotty server address is : "+address)
-        iframe.attr("src", address); 
+        iframe.attr("src", address);
     }
     function getGottyServerAddress(host,topic,text){
         let serverAddress
