@@ -1,4 +1,4 @@
-package com.olaelectric.connectors_trial;
+package com.olaelectric.qa_util_website;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

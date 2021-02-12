@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Bob The Builder</title>
 <link rel="stylesheet" type="text/css" href="./assets/bootstrap.min (1).css">
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
  <div class="alert alert-primary">
@@ -54,7 +56,11 @@
    
 <div class="container text-center">
     <h2> Messages of kafka will be published below</h2>
-    <iframe id="#123" src="http://127.0.0.1:52744" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:70%;width:95%;position:absolute;top:250px;left:50px;right:0px;bottom:0px;border:none;" name="trial1"></iframe>
+    <iframe id="#123" src="http://127.0.0.1:8080" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:70%;width:95%;position:absolute;top:250px;left:50px;right:0px;bottom:0px;border:none;" name="trial1"></iframe>
+
+
+
+
 </div> 
 </body>
 </html>

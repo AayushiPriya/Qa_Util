@@ -1,6 +1,5 @@
-package com.olaelectric.connectors_trial;
+package com.olaelectric.qa_util_website;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

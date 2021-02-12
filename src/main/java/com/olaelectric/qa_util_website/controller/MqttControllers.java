@@ -1,4 +1,4 @@
-package com.olaelectric.connectors_trial.controller;
+package com.olaelectric.qa_util_website.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,21 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class Controllers {
-
-    @RequestMapping("/")
-    public String greeting(){
-        return "index.jsp";
-    }
+public class MqttControllers {
 
     @RequestMapping(value = "/MQTT", method = RequestMethod.GET)
     public String mqttPage(Model model){
-
-        return "MQTT.jsp";
-    }
-
-    @RequestMapping(value = "/KAFKA", method = RequestMethod.GET)
-    public String kafkaPage(){
-        return "KAFKA.jsp";
+        return "MQTT1.jsp";
     }
 }
