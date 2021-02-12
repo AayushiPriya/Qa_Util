@@ -2,28 +2,20 @@ package com.olaelectric.qa_util_website.controller;
 
 import com.olaelectric.qa_util_website.cfg.ApplicationConfigurations;
 import com.olaelectric.qa_util_website.constants.SourceType;
+import com.olaelectric.qa_util_website.dta.WebsiteRequestPojo;
 import com.olaelectric.qa_util_website.service.PublishCommand;
 import com.olaelectric.qa_util_website.util.Scripting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.HashMap;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Map;
 
-@Controller
+@RestController
 public class MqttControllers {
 
-    @RequestMapping(value = "/MQTT", method = RequestMethod.GET)
-    public String mqttPage(Model model){
-        return "MQTT1.jsp";
-    }
+
+    @Autowired
+    public PublishCommand publishCommand;
 
     AnnotationConfigApplicationContext applicationContext;
 
@@ -33,23 +25,28 @@ public class MqttControllers {
 
     StringBuilder responseaddress;
 
-    @Autowired
-    public PublishCommand publishCommand;
-
-    @PostMapping(value = "/v1/MQTT")
-    public Map<String,String> startMqttCommandServer(@RequestBody MqttStartPojo mqttStartPojo)
+    @PostMapping(value = "/start/MqttServer")
+    public String startMqttCommandServer(@RequestBody WebsiteRequestPojo mqttRequestPojo)
     {
+        /**
+         * get bean is called so that a new random port number will be genrated everytime this controller is called.
+         */
+
         applicationContext = new AnnotationConfigApplicationContext(ApplicationConfigurations.class);
         genarateCommandList = applicationContext.getBean("genarateCommandList",List.class);
         /**
          * adding additional paramters to the command
          */
         genarateCommandList.add(SourceType.MQTT.name());
-        genarateCommandList.add(mqttStartPojo.getHost());
-        genarateCommandList.add(mqttStartPojo.getTopic());
-        genarateCommandList.add(mqttStartPojo.getMessageType());
-        genarateCommandList.add(mqttStartPojo.getUsername());
-        genarateCommandList.add(mqttStartPojo.getPassword());
+        genarateCommandList.add(mqttRequestPojo.getHost());
+        genarateCommandList.add(mqttRequestPojo.getTopic());
+        genarateCommandList.add(mqttRequestPojo.getText());
+
+        /**
+         * Username and password is hardcoded.
+         */
+        genarateCommandList.add("UserName");
+        genarateCommandList.add("PassWord");
 
         /**
          * The connection time for mqtt is hardcode. it is in seconds
@@ -69,16 +66,9 @@ public class MqttControllers {
         /**
          * This is where the command will be published
          */
-        publishCommand.excute(genarateCommandList,responseaddress.toString());
+        //publishCommand.excute(genarateCommandList,responseaddress.toString());
 
-        /**
-         * response for the request
-         */
-        Map<String,String> response = new HashMap<>();
-        response.put("status","200");
-        response.put("go to address",responseaddress.toString());
-
-        return response;
+        return responseaddress.toString();
     }
 
 }

@@ -81,7 +81,7 @@
         console.log("The host selected is : "+hostValue+"  topic is : "+topicValue+" text is : "+textValue);   
         let address = getGottyServerAddress(hostValue,topicValue,textValue);
         console.log("The Gotty server address is : "+address)
-        iframe.attr("src", "http://127.0.0.1:8080/"); 
+        iframe.attr("src", address); 
     }
     function getGottyServerAddress(host,topic,text){
         let serverAddress
@@ -90,7 +90,7 @@
         serverAddress = $.ajax({ 
             async : false,
             type:"POST",
-            url:"http://127.0.0.1:8080/testingPost",
+            url:"http://127.0.0.1:8080/start/MqttServer",
             data: JSON.stringify(dataaa), 
             contentType: 'application/json',
             success: function(res) {
