@@ -28,12 +28,11 @@
             <label class="col-md-2" for="host#1234">Host</label>
             <div class="col-md-8">
                 <div class="container" style="position:relative;width:200px;height:34px;border:0;padding:0;margin:0;">
-                    <select style="position:absolute;top:0px;left:0px;width:200px; height:34px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('host#1234').value=this.options[this.selectedIndex].text; document.getElementById('host#1234').value=this.options[this.selectedIndex].value;">
-                        <option value="host1">host1</option>
-                        <option value="host2">host2</option>
-                      </select>
-                      <input type="text" name="hostvalue" id="host#1234" placeholder="add/select a value" onfocus="this.select()" style="position:absolute;top:0px;left:0px;width:183px;height:34px;border:1px solid #556;" >
-                      <input name="idValue" id="idValue" type="hidden" style="position:absolute;top:0px;left:0px;width:183px;height:34px;border:1px solid #556;">
+                    <select style="position:absolute;top:0px;left:0px;width:200px; height:34px;line-height:20px;margin:0;padding:0;" name="host" id = "host#2345" >
+                        <option value="" selected>-none-</option>
+                        <option value="ssl://emqtt-stg-ev-oem-ext.olacabs-dev.in:443" >Develop - ssl://emqtt-stg-ev-oem-ext.olacabs-dev.in:443</option>
+                        <option value="ssl://emqtt-stg-ev.olacabs-dev.in:8883">Stage - ssl://emqtt-stg-ev.olacabs-dev.in:8883</option>
+                </select>
                 </div>  
             </div>
         </div>
@@ -53,11 +52,11 @@
             <label class="col-md-2" for="topic#1234">Text Type</label> 
             <div class="col-md-8" >
                 <div class="container" style="position:relative;width:200px;height:34px;border:0;padding:0;margin:0;">
-                    <select style="position:absolute;top:0px;left:0px;width:200px; height:34px;line-height:20px;margin:0;padding:0;" name="Text" id = "text#2345" >
-                        <option value="TEXT">TEXT</option>
-                        <option value="REGUALR_PACKET">Regular Packet</option>
-                      </select>
-                      <input type="text" placeholder="select a value" id="text#1234" onfocus="this.select()" style="position:absolute;top:0px;left:0px;width:183px;height:34px;border:1px solid #556;" >
+                    <select style="position:absolute;top:0px;left:0px;width:200px; height:34px;line-height:20px;margin:0;padding:0;" name="Text" id = "text#2345">
+                            <option value="" selected>-none-</option>
+                            <option value="TEXT">TEXT</option>
+                            <option value="REGULAR_PACKET">REGULAR_PACKET</option>
+                    </select>
                 </div>  
             </div>
         </div>
@@ -75,9 +74,9 @@
     function displayIframe(){
         console.log("button clicked")
         var iframe = $("#Iframe1234");
-        let hostValue = document.getElementById("host#1234").value;
+        let hostValue = document.getElementById("host#2345").value;
         let topicValue = document.getElementById("topic#1234").value;
-        let textValue = document.getElementById("text#1234").value;
+        let textValue = document.getElementById("text#2345").value;
         console.log("The host selected is : "+hostValue+"  topic is : "+topicValue+" text is : "+textValue);   
         let address = getGottyServerAddress(hostValue,topicValue,textValue);
         console.log("The Gotty server address is : "+address)
