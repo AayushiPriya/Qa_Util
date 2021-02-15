@@ -4,5 +4,5 @@ public enum MessageType {
 
     TEXT,
 
-    REGUALR_PACKET
+    REGULAR_PACKET
 }

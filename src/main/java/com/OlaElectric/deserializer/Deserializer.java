@@ -13,7 +13,7 @@ public class Deserializer {
     }
 
     public void printMessage(byte[] message){
-        if(messageType.equals(MessageType.REGUALR_PACKET.name())){
+        if(messageType.equals(MessageType.REGULAR_PACKET.name())){
             getRegularPacket(message);
         }
     }
