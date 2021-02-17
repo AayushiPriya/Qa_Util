@@ -1,9 +1,10 @@
 package com.olaelectric.qa_util_website.controller;
 
-import com.olaelectric.qa_util_website.cfg.ApplicationConfigurations;
 import com.olaelectric.qa_util_website.constants.SourceType;
 import com.olaelectric.qa_util_website.dta.WebsiteRequestPojo;
-import com.olaelectric.qa_util_website.service.PublishCommand;
+import com.olaelectric.qa_util_website.service.GenerateInitialCommand;
+import com.olaelectric.qa_util_website.service.PublishCommandService;
+import com.olaelectric.qa_util_website.service.ResponseAddressGeneratorService;
 import com.olaelectric.qa_util_website.util.Scripting;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,60 +17,35 @@ import java.util.List;
 public class MqttControllers {
 
 
+    /**
+     * The service is called to publish the command (to run the jar)
+     */
     @Autowired
-    public PublishCommand publishCommand;
+    public PublishCommandService publishCommandService;
 
-    AnnotationConfigApplicationContext applicationContext;
+    /**
+     * This service is called to generate command with random port number, else a single port number will be generated to multiple clinets.
+     * If this service is not called and the initial list is directly autowired then due to bean 'singleton property' a single port number will be generated everytime.
+     */
+    @Autowired
+    private GenerateInitialCommand generateInitialCommand;
+
+    /**
+     * This service is used to build the response address which will be consumed by the iframe to load the terminal in the website.
+     */
+    @Autowired
+    private ResponseAddressGeneratorService responseAddressGeneratorService;
 
     List<String> genarateCommandList;
-
-    Scripting commandScript;
-
-    StringBuilder responseaddress;
 
     @PostMapping(value = "/start/MqttServer")
     public String startMqttCommandServer(@RequestBody WebsiteRequestPojo mqttRequestPojo)
     {
-        /**
-         * get bean is called so that a new random port number will be genrated everytime this controller is called.
-         */
-
-        applicationContext = new AnnotationConfigApplicationContext(ApplicationConfigurations.class);
-        genarateCommandList = applicationContext.getBean("genarateCommandList",List.class);
-        /**
-         * adding additional paramters to the command
-         */
-        genarateCommandList.add(SourceType.MQTT.name());
-        genarateCommandList.add(mqttRequestPojo.getHost());
-        genarateCommandList.add(mqttRequestPojo.getTopic());
-        genarateCommandList.add(mqttRequestPojo.getText());
-
-        /**
-         * Username and password is hardcoded.
-         */
-        genarateCommandList.add("SERVICE:BTESTER");
-        genarateCommandList.add("eyJhbGciOiJIUzI1NiJ9.eyJ0ZW5hbnRfaWQiOiJCVEVTVEVSIiwidGVuYW50X3R5cGUiOiJTRVJWSUNFIiwiZW50aXR5X3R5cGUiOiJFRElUSCIsInNlcnZpY2VfbmFtZSI6IlNFUlZJQ0UiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwaXJlX2F0IjoiMTYzODUxOTEwMTIzMSIsImlhdCI6MTYwNjk4MzEwMSwiZXhwIjoxNjM4NTE5MTAxfQ.S3vEX6PoAD18Pun-JneauIyr4etKniAoEC9eJbnKZzk");
-
-        /**
-         * The connection time for mqtt is hardcode. it is in seconds
-         */
-        genarateCommandList.add("120");
-
-        /**
-         * String builder is used to build the response address string.
-         */
-        responseaddress = new StringBuilder();
-        responseaddress.append("http://");
-        responseaddress.append(genarateCommandList.get(2));
-        responseaddress.append(":");
-        responseaddress.append(genarateCommandList.get(4));
-        applicationContext.close();
-
-        /**
-         * This is where the command will be published
-         */
-        publishCommand.excute(genarateCommandList,responseaddress.toString());
-        return responseaddress.toString();
+        genarateCommandList = generateInitialCommand.getListwithRandomPort(SourceType.MQTT.name(),mqttRequestPojo);
+        String address = responseAddressGeneratorService.getAddress(genarateCommandList);
+        publishCommandService.excute(genarateCommandList,address);
+        return address;
     }
+
 
 }

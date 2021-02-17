@@ -3,6 +3,7 @@ package com.olaelectric.qa_util_website.cfg;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 
 import java.io.IOException;
@@ -13,8 +14,6 @@ import java.util.List;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class ApplicationConfigurations {
-
-    ServerSocket portNumber = new ServerSocket(0);
 
     @Value("${gottyLocation}")
     private String gottyLocation;
@@ -35,21 +34,28 @@ public class ApplicationConfigurations {
     @Value("${jarFileLocation}")
     private String jarFileLocation;
 
-    private String gottyPortNumber = Integer.toString(portNumber.getLocalPort());
-
     List<String> generateCommandList;
 
-    public ApplicationConfigurations() throws IOException {
+    @Bean
+    public String getGottyPortNumber(){
+        ServerSocket portNumber = null;
+        try{
+            portNumber = new ServerSocket(0);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return Integer.toString(portNumber.getLocalPort());
     }
 
     @Bean
-    public List<String> genarateCommandList(){
+    @Primary
+    public List<String> getInitialCommandList(){
         generateCommandList = new ArrayList<>();
         generateCommandList.add(gottyLocation);
         generateCommandList.add(gottyAddressCommand);
         generateCommandList.add(gottyAddressValue);
         generateCommandList.add(gottyPortCommand);
-        generateCommandList.add(gottyPortNumber);
+        generateCommandList.add(getGottyPortNumber());
         generateCommandList.add(gottyTimeoutCommand);
         generateCommandList.add(gottyTimeoutValue);
         generateCommandList.add(executibleCommand);

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PublishCommand {
+public class PublishCommandService {
 
     Scripting commandScript;
+
+
 
     @Async
     public void excute(List<String> command, String addressPort){
