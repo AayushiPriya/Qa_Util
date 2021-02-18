@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.olaelectric</groupId>
-	<artifactId>connectors_trial</artifactId>
+	<artifactId>Qa_Util</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>connectors_trial</name>
