@@ -67,7 +67,7 @@
     <div class="container text-center">
         <h2> Messages of MQTT will be published here</h2>
         <iframe id="Iframe1234" src="" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:60%;width:95%;position:absolute;top:250px;left:50px;right:0px;bottom:0px;border:none;padding:15px;" name="trial1"></iframe>
-    </div> 
+    </div>
 </div>
 </body>
 <script>
@@ -89,7 +89,7 @@
         serverAddress = $.ajax({ 
             async : false,
             type:"POST",
-            url:"http://127.0.0.1:8080/start/MqttServer",
+            url:"http://10.209.1.187:8085/start/MqttServer",
             data: JSON.stringify(dataaa), 
             contentType: 'application/json',
             success: function(res) {

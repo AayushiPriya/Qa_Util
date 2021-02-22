@@ -1,0 +1,9 @@
+package com.olaelectric.qa_util_website.constants;
+
+public class MqttCredentials {
+
+    public static final String mqttUsername = "SERVICE:BTESTER";
+
+    public static final String mqttPassword = "eyJhbGciOiJIUzI1NiJ9.eyJzZXJ2aWNlX25hbWUiOiJTRVJWSUNFIiwidGVuYW50X2lkIjoiQlRFU1RFUiIsInRlbmFudF90eXBlIjoiU0VSVklDRSIsImVudGl0eV90eXBlIjoiRURJVEgiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwaXJlX2F0IjoxNjQ1NTM3MzI5OTU1LCJpYXQiOjE2MTQwMDEzMjksImV4cCI6MTY0NTUzNzMyOX0.uGhpQOXFUpTHjhotc9QxqumQykKtPlB4vhEg0kfVKAo";
+
+}

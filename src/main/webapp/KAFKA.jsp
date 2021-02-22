@@ -90,7 +90,7 @@
         serverAddress = $.ajax({ 
             async : false,
             type:"POST",
-            url:"http://127.0.0.1:8080/start/KafkaServer",
+            url:"http://127.0.0.1:8085/start/KafkaServer",
             data: JSON.stringify(dataaa), 
             contentType: 'application/json',
             success: function(res) {

@@ -1,6 +1,7 @@
 package com.olaelectric.qa_util_website.service;
 
 import com.olaelectric.qa_util_website.cfg.ApplicationConfigurations;
+import com.olaelectric.qa_util_website.constants.MqttCredentials;
 import com.olaelectric.qa_util_website.constants.SourceType;
 import com.olaelectric.qa_util_website.dta.WebsiteRequestPojo;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -25,8 +26,8 @@ public class GenerateInitialCommand {
         initialCommandList.add(requestPojo.getText());
 
         if(sourceType.equals(SourceType.MQTT.name())){
-            initialCommandList.add("SERVICE:BTESTER");
-            initialCommandList.add("eyJhbGciOiJIUzI1NiJ9.eyJ0ZW5hbnRfaWQiOiJCVEVTVEVSIiwidGVuYW50X3R5cGUiOiJTRVJWSUNFIiwiZW50aXR5X3R5cGUiOiJFRElUSCIsInNlcnZpY2VfbmFtZSI6IlNFUlZJQ0UiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwaXJlX2F0IjoiMTYzODUxOTEwMTIzMSIsImlhdCI6MTYwNjk4MzEwMSwiZXhwIjoxNjM4NTE5MTAxfQ.S3vEX6PoAD18Pun-JneauIyr4etKniAoEC9eJbnKZzk");
+            initialCommandList.add(MqttCredentials.mqttUsername);
+            initialCommandList.add(MqttCredentials.mqttPassword);
         }
         initialCommandList.add("120");
 

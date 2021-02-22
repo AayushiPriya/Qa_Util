@@ -20,6 +20,7 @@ public class Scripting {
         ProcessBuilder processBuilder = new ProcessBuilder();
         // Run a shell command
         processBuilder.command(inputCommand);
+        log.info("this is the input command {}",inputCommand);
         try {
             Process process = processBuilder.start();
             log.info("Thread started for port "+addressPort);
