@@ -6,8 +6,10 @@
 <meta charset="UTF-8">
 <title>Bob The Builder</title>
 <link rel="stylesheet" type="text/css" href="./assets/bootstrap.min (1).css">
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3/1/1-1/jquery.min.js"></script>
+<script src="webjars/stomp-websocket/2/3/3/stomp.min.js"></script>
+<script src="webjars/sockjs-client/1/0/2/sockjs.min.js"></script>
 </head>
 <body>
  <div class="alert alert-primary">
