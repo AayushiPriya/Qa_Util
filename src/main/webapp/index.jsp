@@ -18,6 +18,8 @@
         <a href="./" class="btn btn-link">HOME</a>
         <a href="./MQTT" class="btn btn-link">MQTT</a>
         <a href="./KAFKA" class="btn btn-link">KAFKA</a>
+        <a href="./Health_Check" class="btn btn-link">Health_Check</a>
+
     </p>
 </div>
 </body>

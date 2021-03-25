@@ -23,4 +23,13 @@ public class WebController {
         return "index.jsp";
     }
 
+    @RequestMapping(value ="/Health_Check",method =RequestMethod.GET)
+    public String health_checkDevelop(){return "Health_check.jsp"; }
+
+    @RequestMapping(value="/Health_Check_Stage",method=RequestMethod.GET)
+    public String health_checkStage(){return "Health_check_StageEndpoint.jsp";}
+
+    @RequestMapping(value="/Overall_Service_Health",method=RequestMethod.GET)
+    public String health_checkOverall(){return "Overall_Service_Health.jsp";}
+
 }
